@@ -34,7 +34,7 @@ public class Main extends Activity {
         btn_TJWD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(Main.this, "----------进入MainActivity-----------", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Main.this, "----------进入MainActivity-----------", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "onClick: 进入MainActivity");
                 Main.this.startActivity(new Intent(Main.this,MainActivity.class));
             }

@@ -84,10 +84,10 @@ public class MainActivity extends Activity {
 				ACTION_USB_PERMISSION);
 		Intent i = getIntent();
 		String action = i.getAction();
-		if (action.equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
+//		if (action.equals("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
 			initUSB();
 			mCheckBox.setChecked(true);
-		}
+//		}
 	}
 
 	@Override
