@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:text="定日镜操作系统"
+        android:textSize="26sp"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_weight="0.29" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:text="初始时间与经纬度"
+            android:id="@+id/btn_InitTimeJW" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="监控并控制"
+            android:id="@+id/btn_MonitoringControl" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="设置"
+            android:id="@+id/btn_Setting" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="帮助"
+            />
+    </LinearLayout>
+</LinearLayout>
