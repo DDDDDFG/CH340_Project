@@ -214,7 +214,7 @@ public class TimeandJWD {
         return criteria;
     }
 
-    public String getData() {
+    public  String getData() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日    HH:mm:ss     ");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String time = formatter.format(curDate);

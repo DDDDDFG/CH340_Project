@@ -5,29 +5,17 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.RemoteException;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.os.*;
+
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
-import java.util.ArrayList;
+import android.widget.*;
 
 import com.agent.model.MIBtree;
 import com.agent.service.AgentService;
+import com.util.TimeandJWD;
 import com.won.usb_ch340.R;
+
+import java.util.ArrayList;
 
 public class AgentActivity extends Activity implements View.OnClickListener {
     /** Messenger for communicating with service. */
@@ -43,7 +31,6 @@ public class AgentActivity extends Activity implements View.OnClickListener {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.main);
 
         messagesReceivedScrollView = (LinearLayout) findViewById(R.id.snmp_messages_history);
@@ -58,26 +45,6 @@ public class AgentActivity extends Activity implements View.OnClickListener {
         Intent intent = new Intent(this, AgentService.class);
         startService(intent);
         doBindAgentService();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main, menu);
-
-        // Calling super after populating the menu is necessary here to ensure that the
-        // action bar helpers have a chance to handle this event.
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -128,6 +95,8 @@ public class AgentActivity extends Activity implements View.OnClickListener {
 
     private void sendMessageToAgentService(Message msg){
         try {
+            TimeandJWD tj=new TimeandJWD(AgentActivity.this);
+            msg.obj=tj;
             mService.send(msg);
         } catch (RemoteException e) {
 

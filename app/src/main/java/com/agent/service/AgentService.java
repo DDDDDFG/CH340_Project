@@ -22,6 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.agent.model.MIBtree;
+import com.util.TimeandJWD;
 
 public class AgentService extends Service implements CommandResponder {
 
@@ -38,9 +39,14 @@ public class AgentService extends Service implements CommandResponder {
     public static final int MSN_SEND_DANGER_TRAP = 5;
     public static final int MSG_MANAGER_MESSAGE_RECEIVED = 6;
 
+    TimeandJWD tj;
+
     public static String lastRequestReceived = "";
 
     private Snmp snmp;
+
+
+
     private static final String SNMP_PORT = "32150";
 
     private static ArrayList<Address> registeredManagers = null;
@@ -54,6 +60,11 @@ public class AgentService extends Service implements CommandResponder {
     class IncomingHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
+            if(msg.obj!=null)
+            {
+                tj= (TimeandJWD) msg.obj;
+                Log.i(TAG, "handleMessage: "+tj.getData());
+            }
             switch (msg.what) {
                 case MSG_REGISTER_CLIENT:
                     mClients.add(msg.replyTo);
@@ -127,10 +138,12 @@ public class AgentService extends Service implements CommandResponder {
             PDUv1 pdu = new PDUv1();
             pdu.setType(PDU.V1TRAP);
             pdu.setGenericTrap(PDUv1.COLDSTART);
-            pdu.add(new VariableBinding(new OID(new int[]{1,3,6,123456789}),new OctetString("tzf")));//1, 3, 6, 1, 2, 1, 1, 2
+//            TimeandJWD tj=new TimeandJWD(AgentService.this);
+//            String str= tj.getData();
+            pdu.add(new VariableBinding(new OID(new int[]{1,3,6,123456789}),new OctetString(tj.getData())));//1, 3, 6, 1, 2, 1, 1, 2
 
             // Specify receiver
-            Address targetAddress = new UdpAddress("192.168.0.186/162");
+            Address targetAddress = new UdpAddress("192.168.0.6/162");
             CommunityTarget target = new CommunityTarget();
             target.setCommunity(new OctetString("public"));
             target.setVersion(SnmpConstants.version1);

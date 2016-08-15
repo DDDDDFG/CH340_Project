@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.agent.activity.AgentActivity;
 import com.won.usb_ch340.MainActivity;
 import com.won.usb_ch340.R;
 
@@ -18,6 +19,7 @@ public class Main extends Activity {
     Button btn_TJWD;
     Button btn_MonitoringControl;
     Button btn_Setting;
+    Button btn_InitServer;
     public final String TAG="tzf";
 
     @Override
@@ -39,6 +41,14 @@ public class Main extends Activity {
             }
         });
         btn_Setting= (Button) findViewById(R.id.btn_Setting);
+        btn_InitServer= (Button) findViewById(R.id.btn_InitServer);
+        btn_InitServer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Main.this, AgentActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

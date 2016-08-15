@@ -30,6 +30,13 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="60dp"
+
+            android:text="初始服务器数据"
+            android:id="@+id/btn_InitServer" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:text="监控并控制"
             android:id="@+id/btn_MonitoringControl" />
         <Button
